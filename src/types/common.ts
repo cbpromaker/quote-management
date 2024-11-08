@@ -11,6 +11,19 @@ export interface User extends UserLoginInfo {
   permissions: Record<Permission, boolean>;
 }
 
-// export interface Estimate {}
-//
-// export interface Specification extends Estimate {}
+export interface Estimate {
+  id: number;
+  createAt: Date;
+  client: string;
+  creator: UserName;
+  lastModified: Date;
+  lastHandler: UserName;
+  amount: number;
+}
+
+export interface Specification extends Estimate {
+  paymentMethod: 'card' | 'taxInvoice';
+  taxInvoice?: boolean;
+  paymentConfirmed: boolean;
+  // paymentConfirmed를 확인하는 책임은 lastHandler에게 부여된다.
+}
