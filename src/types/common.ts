@@ -7,7 +7,7 @@ export interface UserLoginInfo {
   role: UserRole;
 }
 
-export interface User extends UserLoginInfo {
+export interface UserInfo extends UserLoginInfo {
   permissions: Record<Permission, boolean>;
 }
 

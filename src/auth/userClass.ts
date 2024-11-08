@@ -1,8 +1,8 @@
-import { UserLoginInfo, User, Permission, UserRole } from '../types';
+import { UserLoginInfo, UserInfo, Permission, UserRole } from '../types';
 
-export class PermissionManager {
-  private static instance: PermissionManager;
-  private currentUser: User | null = null;
+export class User {
+  private static instance: User;
+  private currentUser: UserInfo | null = null;
 
   private readonly rolePermissions: Record<UserRole, Permission[]> = {
     manager: ['read', 'update', 'create', 'delete'],
@@ -12,7 +12,7 @@ export class PermissionManager {
 
   private constructor() {}
 
-  private initializeUserPermissions(loggedInUser: UserLoginInfo): User {
+  private initializeUserPermissions(loggedInUser: UserLoginInfo): UserInfo {
     const rolePermissions = this.rolePermissions[loggedInUser.role];
     const permissions = {} as Record<Permission, boolean>;
 
@@ -32,14 +32,14 @@ export class PermissionManager {
     this.currentUser = this.initializeUserPermissions(loggedInUser);
   }
 
-  public static getInstance(): PermissionManager {
-    if (!PermissionManager.instance) {
-      PermissionManager.instance = new PermissionManager();
+  public static getInstance(): User {
+    if (!User.instance) {
+      User.instance = new User();
     }
-    return PermissionManager.instance;
+    return User.instance;
   }
 
-  public getCurrentUser(): User | null {
+  public getCurrentUser(): UserInfo | null {
     return this.currentUser;
   }
 
