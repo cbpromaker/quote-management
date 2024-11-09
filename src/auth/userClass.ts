@@ -32,6 +32,10 @@ export class User {
     this.currentUser = this.initializeUserPermissions(loggedInUser);
   }
 
+  public logout(): void {
+    this.currentUser = null;
+  }
+
   public static getInstance(): User {
     if (!User.instance) {
       User.instance = new User();
