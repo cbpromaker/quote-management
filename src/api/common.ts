@@ -1,4 +1,4 @@
-import { UserLoginInfo, User, Estimate, Specification } from '../types';
+import { UserLoginInfo, Estimate, Specification } from '../types';
 
 // 로그인 관련 API
 export const authAPI = {
@@ -7,15 +7,11 @@ export const authAPI = {
     throw new Error('Not implemented');
   },
 
-  getUsers: async (): Promise<User[]> => {
+  logout: async (): Promise<void> => {
     throw new Error('Not implemented');
   },
 
-  addUser: async (user: Omit<UserLoginInfo, 'id'>): Promise<User> => {
-    throw new Error('Not implemented');
-  },
-
-  deleteUser: async (username: string): Promise<void> => {
+  updateUser: async (username: string): Promise<void> => {
     throw new Error('Not implemented');
   },
 };
