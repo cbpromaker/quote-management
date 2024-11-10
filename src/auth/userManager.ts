@@ -1,7 +1,7 @@
 import { UserLoginInfo, UserInfo, Permission, UserRole } from '../types';
 
-export class User {
-  private static instance: User;
+export class UserManager {
+  private static instance: UserManager;
   private currentUser: UserInfo | null = null;
 
   private readonly rolePermissions: Record<UserRole, Permission[]> = {
@@ -32,15 +32,15 @@ export class User {
     this.currentUser = this.initializeUserPermissions(loggedInUser);
   }
 
-  public logout(): void {
+  public releaseCurrentUser(): void {
     this.currentUser = null;
   }
 
-  public static getInstance(): User {
-    if (!User.instance) {
-      User.instance = new User();
+  public static getInstance(): UserManager {
+    if (!UserManager.instance) {
+      UserManager.instance = new UserManager();
     }
-    return User.instance;
+    return UserManager.instance;
   }
 
   public getCurrentUser(): UserInfo | null {
@@ -52,3 +52,5 @@ export class User {
     return this.currentUser.permissions[permission];
   }
 }
+
+export default UserManager.getInstance();
