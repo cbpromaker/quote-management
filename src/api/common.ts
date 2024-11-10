@@ -11,7 +11,7 @@ export const authAPI = {
     throw new Error('Not implemented');
   },
 
-  updateUser: async (username: string): Promise<void> => {
+  updateUserInfo: async (username: string): Promise<void> => {
     throw new Error('Not implemented');
   },
 };
