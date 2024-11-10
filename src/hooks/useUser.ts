@@ -1,13 +1,10 @@
-import { User } from '../auth/userClass';
-import { UserLoginInfo, Permission } from '../types';
+import userManager from '../auth/userManager';
+import { Permission } from '../types';
 
-export const useUser = () => {
-  const user = User.getInstance();
-
+export const useCurrentUser = () => {
   return {
-    user: user.getCurrentUser(),
-    hasPermission: (permission: Permission) => user.hasPermission(permission),
-    login: (userInfo: UserLoginInfo) => user.setCurrentUser(userInfo),
-    logout: () => user.logout(),
+    user: userManager.getCurrentUser(),
+    hasPermission: (permission: Permission) =>
+      userManager.hasPermission(permission),
   };
 };
