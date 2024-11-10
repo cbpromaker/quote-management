@@ -1,10 +1,20 @@
-import { UserInfo, Estimate, Specification } from '../types';
+import { Estimate, Specification, LoginReq, LoginRes } from '../types';
 
 // 로그인 관련 API
 export const authAPI = {
-  login: async (username: string, password: string): Promise<UserInfo> => {
-    // 실제 구현에서는 서버와 통신
-    throw new Error('Not implemented');
+  login: async ({ username, password }: LoginReq): Promise<LoginRes> => {
+    throw new Error('Not implemented'); // temp
+    try {
+      //check username and password
+      //if correct
+      // return user info with success: true
+      //else
+      // return success: false
+    } catch {
+      throw new Error(
+        '서버와의 통신이 실패했습니다. 잠시 후 다시 시도해주세요.',
+      );
+    }
   },
 
   logout: async (): Promise<void> => {

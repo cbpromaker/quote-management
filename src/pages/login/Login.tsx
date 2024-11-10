@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { User } from '../../auth/userClass';
 import { authAPI } from '../../api/common';
+import userManager from '../../auth/userManager';
+import useSafeContext, { PageStateContext } from '../../contexts';
 import './Login.css';
 
 const Login = () => {
@@ -10,13 +11,21 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      // TODO:: custom hook 사용해서 개선
-      const userInfo = await authAPI.login(username);
-      const permissionManager = User.getInstance();
-      permissionManager.setCurrentUser(userInfo);
+      const response = await authAPI.login({ username, password });
+
+      if (!response.success || !response.userLoginInfo) {
+        // 예상된 실패 케이스 (잘못된 비밀번호, 존재하지 않는 계정 등)
+        setError('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return;
+      }
+
+      userManager.setCurrentUser(response.userLoginInfo);
+      const { setPageState } = useSafeContext(PageStateContext);
+      setPageState('estimates');
+
       setError('');
     } catch (err) {
-      setError('로그인에 실패했습니다.');
+      setError('서버와의 통신이 실패했습니다. 잠시 후 다시 시도해주세요.');
     }
   };
 
