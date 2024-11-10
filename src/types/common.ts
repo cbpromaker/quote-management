@@ -27,3 +27,9 @@ export interface Specification extends Estimate {
   paymentConfirmed: boolean;
   // paymentConfirmed를 확인하는 책임은 lastHandler에게 부여된다.
 }
+
+export type PageState =
+  | 'login'
+  | 'estimates'
+  | 'estimate_update'
+  | 'specification';
